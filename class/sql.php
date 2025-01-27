@@ -1,6 +1,6 @@
 <?php
 
-class sql extends PDO{
+class Sql extends PDO{
 
     private $conn;
 
@@ -8,24 +8,24 @@ class sql extends PDO{
         $this->conn = new PDO("mysql:dbname=test;host=localhost","root","");
     }
  
-    private function setparams($stament,$parameters = array()){
+    private function setParams($stament,$parameters = array()){
         foreach ($parameters as $key => $value){
-            $stament->setparam($key,$value);
+            $this->setparam($stament,$key,$value);
          }
     }
 
-    private function setparam($stament,$key,$value){
+    private function setParam($stament,$key,$value){
         $stament->bindparam($key,$value);
     }
 
     public function rquery($rawquery,$params = array()){
-        $st = $this->conn->prepare($rawquery,$params);
-        $this->setparams($st,$params);
+        $st = $this->conn->prepare($rawquery);
+        $this->setParams($st,$params);
         $st->execute();
         return $st;
     }
 
-    public function select($rawquery,$params = array()){
+    public function select($rawquery,$params = array()):array{
         $st = $this->rquery($rawquery,$params);
         return $st->fetchAll(PDO::FETCH_ASSOC);
     }
