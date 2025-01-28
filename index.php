@@ -31,7 +31,11 @@ require_once "config.php";
 //echo $aluno;
 
 // atualizar dados
-$atuliza = new usuario();
-$atuliza->carregarid(8);
-$atuliza->Update("solange","1984",8);
-?>
+//$atuliza = new usuario();
+//$atuliza->carregarid(8);
+//$atuliza->Update("solange","1984");
+
+//excluir todos
+$deletar = new usuario();
+$deletar->carregarid(8);
+$deletar->Delete();

@@ -44,7 +44,6 @@ class Usuario{
         ));
 
         if (isset($result[0])){
-            $row = $result[0];
 
             $this->setData($result[0]);
         }
@@ -100,10 +99,9 @@ class Usuario{
         $this->setdessenha($senha);
     }
     
-    public function Update($login,$senha,$id){
+    public function Update($login,$senha){
         $this->setDeslogin($login);
         $this->setDessenha($senha);
-        $this->setIdusuario($id);
         
         $sql = new Sql();
         $sql->rquery("UPDATE usuarios SET deslogin = :LOGIN , dessenha = :SENHA WHERE idusuario = :ID",array(
@@ -114,6 +112,19 @@ class Usuario{
 
     }
     
+    public function Delete(){
+        $sql = new Sql();
+        $sql->rquery("DELETE FROM usuarios WHERE idusuario = :ID",array(
+            'ID'=>$this->getIdusuario()
+        ));
+
+        $this->setDeslogin("");
+        $this->setDessenha("");
+        $this->setIdusuario(0);
+        $this->setDtcadastro(new datetime());
+
+    }
+
     public function __toString(){
         return json_encode(array(
              "id do cadastro:" => $this->getIdusuario(),
