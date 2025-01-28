@@ -21,7 +21,17 @@ require_once "config.php";
 //echo json_encode($pesquisa);
 
 //carrega usuarios usando login e senha
-$login = new Usuario();
-$login->login("eloah","123456789fd");
-echo $login;
+//$login = new Usuario();
+//$login->login("eloah","123456789fd");
+//echo $login;
+
+ //insert
+//$aluno = new Usuario("aluno","89283");
+//$aluno->insert();
+//echo $aluno;
+
+// atualizar dados
+$atuliza = new usuario();
+$atuliza->carregarid(8);
+$atuliza->Update("solange","1984",8);
 ?>
